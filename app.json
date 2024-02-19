@@ -1,0 +1,23 @@
+{
+  "sourceForRawZone":{
+    "source_bucket":"iswarya-landingbucket-batch01",
+    "destination_bucket":"iswarya-rawbucket-batch01",
+    "source_folder_key":"Data/",
+    "destination_folder_key":"Dataset/"
+
+  },
+  "source": [
+    "s3://iswarya-rawbucket-batch01/actives.parquet",
+    "s3://iswarya-rawbucket-batch01/viewership.parquet"
+  ],
+  "destination": "s3://iswarya-stagingbucket-batch01/results/",
+  "delta_table_loaction":"s3://iswarya-stagingbucket-batch01/deltatable/",
+  "transformations": {
+    "advertising_id": "sha2",
+    "user_id": "sha2",
+    "user_longitude": "convert to decimal with 7 precision",
+    "user_latitude": "convert to decimal with 7 precision",
+    "location_source": "Convert to a comma-separated string"
+  },
+  "partitions":["month","date"]
+}
